@@ -1,4 +1,29 @@
 <template>
+  <div class="p-6">
+      <button
+        v-if="!isAuthenticated && router.name !== 'logIn'"
+        @click="() => router.push({ name: 'logIn' })"
+        class="rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700"
+      >
+        Login
+      </button>
+    <div class="flex justify-between items-center">
+
+      <h1 class="text-2xl font-bold">Dashboard</h1>
+
+      <!-- 🔥 Logout button only if:
+           1. User is logged in
+           2. Not on the login page -->
+      <button
+        v-if="isAuthenticated && router.name !== 'logIn'"
+        @click="handleLogout"
+        class="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+      >
+        Logout
+      </button>
+
+    </div>
+  </div>
   <div class="min-h-screen flex bg-slate-950 text-slate-100">
     <!-- Sidebar -->
     <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col">
@@ -9,6 +34,7 @@
 
       <nav class="flex-1 px-2 py-4 space-y-1">
         <RouterLink
+          v-if="isAuthenticated"
           to="/"
           class="flex items-center px-3 py-2 rounded-lg text-sm hover:bg-slate-800"
           active-class="bg-emerald-500 text-slate-950"
@@ -18,6 +44,7 @@
         </RouterLink>
 
         <RouterLink
+          v-if="isAuthenticated"
           to="/trips"
           class="flex items-center px-3 py-2 rounded-lg text-sm hover:bg-slate-800"
           active-class="bg-emerald-500 text-slate-950"
@@ -26,6 +53,7 @@
         </RouterLink>
 
         <RouterLink
+          v-if="isAuthenticated"
           to="/cities"
           class="flex items-center px-3 py-2 rounded-lg text-sm hover:bg-slate-800"
           active-class="bg-emerald-500 text-slate-950"
@@ -34,6 +62,7 @@
         </RouterLink>
 
         <RouterLink
+          v-if="isAuthenticated"
           to="/buses"
           class="flex items-center px-3 py-2 rounded-lg text-sm hover:bg-slate-800"
           active-class="bg-emerald-500 text-slate-950"
@@ -42,6 +71,7 @@
         </RouterLink>
 
         <RouterLink
+          v-if="isAuthenticated"
           to="/bookings"
           class="flex items-center px-3 py-2 rounded-lg text-sm hover:bg-slate-800"
           active-class="bg-emerald-500 text-slate-950"
@@ -70,9 +100,10 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useRoute, RouterView, RouterLink } from 'vue-router';
-
-const route = useRoute();
+import { useRouter, RouterView, RouterLink } from 'vue-router';
+import { logOut } from './services/useAuth';
+import { isAuthenticated } from './services/useAuth';
+const router = useRouter();
 const currentYear = new Date().getFullYear();
 
 const titles = {
@@ -83,7 +114,12 @@ const titles = {
   bookings: 'Bookings',
 };
 
-const currentTitle = computed(() => titles[route.name] || 'Admin');
+const handleLogout = () => {
+  logOut();
+  router.push({ name: 'login' })
+}
+
+const currentTitle = computed(() => titles[router.name] || 'Admin');
 </script>
 
 <style scoped>
