@@ -11,9 +11,9 @@
 
       <h1 class="text-2xl font-bold">Dashboard</h1>
 
-      <!-- 🔥 Logout button only if:
-           1. User is logged in
-           2. Not on the login page -->
+      <!-- Logout button only if:
+            User is logged in
+            Not on the login page -->
       <button
         v-if="isAuthenticated && router.name !== 'logIn'"
         @click="handleLogout"
@@ -116,7 +116,7 @@ const titles = {
 
 const handleLogout = () => {
   logOut();
-  router.push({ name: 'login' })
+  router.push({ name: 'logIn' })
 }
 
 const currentTitle = computed(() => titles[router.name] || 'Admin');

@@ -167,7 +167,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import api from "../services/api"; // adjust path if needed
+import api from "../services/api"; 
 
 const buses = ref([]);
 const error = ref("");

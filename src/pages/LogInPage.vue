@@ -54,7 +54,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import api from '../services/api' // same path you use in TripsPage
+import api from '../services/api'
 import { logIn } from '../services/useAuth'
 import axios from 'axios'
 const router = useRouter()
@@ -71,7 +71,7 @@ const handleLogin = async () => {
   loading.value = true
   error.value = ''
   try {
-    // adjust body keys if your backend expects different names
+    
    const { data } = await axios.post(
     "http://localhost:8080/auth/logIn",
     {
@@ -80,7 +80,7 @@ const handleLogin = async () => {
     }
     );
 
-    // Try to detect token field (adjust if needed)
+   
     const token =
       data.token || data.jwt || data.accessToken || data.authToken
 

@@ -254,7 +254,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import api from "../services/api"; // make sure this path is correct for your project
+import api from "../services/api";
 
 const trips = ref([]);
 const cities = ref([]);
@@ -266,7 +266,7 @@ const error = ref("");
 const showCreate = ref(false);
 const search = ref("");
 
-// form: adapt keys to your backend DTO
+
 const form = ref({
   cityFromId: "",
   cityToId: "",
@@ -352,9 +352,7 @@ const createTrip = async () => {
   submitting.value = true;
   error.value = "";
   try {
-    // If your backend also needs a separate departureDate field,
-    // you can derive it here from departureTime:
-    // const departureDate = form.value.departureTime.split("T")[0];
+    
 
     const payload = {
       cityFromId: form.value.cityFromId,
