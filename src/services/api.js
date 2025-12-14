@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api', 
+  baseURL: 'http://busapp-alb-536116599.eu-north-1.elb.amazonaws.com/api', 
   // change to your backend URL when deploying:
   // baseURL: 'https://your-server.com/api',
 });

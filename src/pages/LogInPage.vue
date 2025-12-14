@@ -73,7 +73,7 @@ const handleLogin = async () => {
   try {
     
    const { data } = await axios.post(
-    "http://localhost:8080/auth/logIn",
+    "http://busapp-alb-536116599.eu-north-1.elb.amazonaws.com/auth/logIn",
     {
         email: form.value.email,
         password: form.value.password
