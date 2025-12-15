@@ -320,7 +320,7 @@ const loadTrips = async () => {
   loading.value = true;
   error.value = "";
   try {
-    const { data } = await api.get("/admin/trips");
+    const { data } = await api.get("/api/admin/trips");
     trips.value = data;
   } catch (e) {
     console.error(e);
@@ -332,7 +332,7 @@ const loadTrips = async () => {
 
 const loadCities = async () => {
   try {
-    const { data } = await api.get("/admin/cities");
+    const { data } = await api.get("/api/admin/cities");
     cities.value = data;
   } catch (e) {
     console.error(e);
@@ -341,7 +341,7 @@ const loadCities = async () => {
 
 const loadBuses = async () => {
   try {
-    const { data } = await api.get("/admin/buses");
+    const { data } = await api.get("/api/admin/buses");
     buses.value = data;
   } catch (e) {
     console.error(e);
@@ -364,7 +364,7 @@ const createTrip = async () => {
       price: form.value.price,
     };
 
-    await api.post("/admin/trips", payload);
+    await api.post("/api/admin/trips", payload);
     await loadTrips();
     showCreate.value = false;
     resetForm();
@@ -380,7 +380,7 @@ const deleteTrip = async (id) => {
   if (!confirm('Delete this trip?')) return
   error.value = ''
   try {
-    await api.delete(`/admin/trips/${id}`)
+    await api.delete(`/api/admin/trips/${id}`)
     trips.value = trips.value.filter((t) => t.tripId !== id)
   } catch (e) {
     console.error(e)

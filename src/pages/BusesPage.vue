@@ -189,7 +189,7 @@ const seatForm = ref({
 async function loadBuses() {
   try {
     error.value = "";
-    const res = await api.get("/admin/buses"); // -> /api/admin/buses
+    const res = await api.get("/api/admin/buses"); // -> /api/admin/buses
     buses.value = res.data;
   } catch (e) {
     console.error(e);
@@ -218,10 +218,10 @@ async function handleSubmit() {
     error.value = "";
 
     if (!editingBus.value) {
-      const res = await api.post("/admin/buses", form.value);
+      const res = await api.post("/api/admin/buses", form.value);
       buses.value.push(res.data);
     } else {
-      const res = await api.put(`/admin/buses/${editingBus.value.id}`, form.value);
+      const res = await api.put(`/api/admin/buses/${editingBus.value.id}`, form.value);
       const updated = res.data;
       const index = buses.value.findIndex((b) => b.id === updated.id);
       if (index !== -1) {
@@ -240,7 +240,7 @@ async function handleDelete(id) {
   if (!confirm("Delete this bus?")) return;
   try {
     error.value = "";
-    await api.delete(`/admin/buses/${id}`);
+    await api.delete(`/api/admin/buses/${id}`);
     buses.value = buses.value.filter((b) => b.id !== id);
   } catch (e) {
     console.error(e);
@@ -264,7 +264,7 @@ async function handleGenerateSeats() {
   if (!seatBus.value) return;
   try {
     error.value = "";
-    await api.post(`/admin/seats/bus/${seatBus.value.id}/generate`, seatForm.value);
+    await api.post(`/api/admin/seats/bus/${seatBus.value.id}/generate`, seatForm.value);
     await loadBuses(); // refresh seatCount
     closeSeatGenerator();
   } catch (e) {

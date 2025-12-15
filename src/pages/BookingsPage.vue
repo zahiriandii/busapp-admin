@@ -239,7 +239,7 @@ const loadBookings = async () => {
   loading.value = true;
   error.value = "";
   try {
-    const { data } = await api.get("/admin/bookings"); // -> /api/admin/bookings
+    const { data } = await api.get("/api/admin/bookings"); // -> /api/admin/bookings
     bookings.value = data;
   } catch (e) {
     console.error(e);

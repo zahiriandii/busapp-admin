@@ -118,7 +118,7 @@ const editingCity = ref(null);
 async function loadCities() {
   try {
     error.value = "";
-    const res = await api.get("/admin/cities"); // baseURL = /api -> /api/admin/cities
+    const res = await api.get("/api/admin/cities"); // baseURL = /api -> /api/admin/cities
     cities.value = res.data;
   } catch (e) {
     console.error(e);

@@ -57,8 +57,9 @@ import { useRouter } from 'vue-router'
 import api from '../services/api'
 import { logIn } from '../services/useAuth'
 import axios from 'axios'
-const router = useRouter()
 
+const router = useRouter()
+const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5173/api';
 const form = ref({
   email: '',
   password: '',
@@ -73,7 +74,7 @@ const handleLogin = async () => {
   try {
     
    const { data } = await axios.post(
-    "http://busapp-alb-536116599.eu-north-1.elb.amazonaws.com/auth/logIn",
+    `${baseUrl}/auth/logIn`,
     {
         email: form.value.email,
         password: form.value.password
